@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD3E09B1181CB3C600BD22BE /* normalBar-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3E09AF181CB3C600BD22BE /* normalBar-hd.png */; };
+		BD3E09B2181CB3C600BD22BE /* normalBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3E09B0181CB3C600BD22BE /* normalBar.png */; };
+		BD3E09B5181D61B500BD22BE /* yellowBrick-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3E09B3181D61B500BD22BE /* yellowBrick-hd.png */; };
+		BD3E09B6181D61B500BD22BE /* yellowBrick.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3E09B4181D61B500BD22BE /* yellowBrick.png */; };
 		BDE32F47181C684C00E8CAAE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE32F46181C684C00E8CAAE /* QuartzCore.framework */; };
 		BDE32F49181C684C00E8CAAE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE32F48181C684C00E8CAAE /* OpenGLES.framework */; };
 		BDE32F4B181C684C00E8CAAE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE32F4A181C684C00E8CAAE /* OpenAL.framework */; };
@@ -145,6 +149,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD3E09AF181CB3C600BD22BE /* normalBar-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "normalBar-hd.png"; path = "Resources/normalBar-hd.png"; sourceTree = "<group>"; };
+		BD3E09B0181CB3C600BD22BE /* normalBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalBar.png; path = Resources/normalBar.png; sourceTree = "<group>"; };
+		BD3E09B3181D61B500BD22BE /* yellowBrick-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yellowBrick-hd.png"; path = "Resources/yellowBrick-hd.png"; sourceTree = "<group>"; };
+		BD3E09B4181D61B500BD22BE /* yellowBrick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowBrick.png; path = Resources/yellowBrick.png; sourceTree = "<group>"; };
 		BDE32F43181C684C00E8CAAE /* Fire Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fire Ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE32F46181C684C00E8CAAE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BDE32F48181C684C00E8CAAE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -506,6 +514,10 @@
 		BDE32F5B181C684C00E8CAAE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD3E09B3181D61B500BD22BE /* yellowBrick-hd.png */,
+				BD3E09B4181D61B500BD22BE /* yellowBrick.png */,
+				BD3E09AF181CB3C600BD22BE /* normalBar-hd.png */,
+				BD3E09B0181CB3C600BD22BE /* normalBar.png */,
 				BDE32F5C181C684C00E8CAAE /* Default.png */,
 				BDE32F5E181C684C00E8CAAE /* Default@2x.png */,
 				BDE32F60181C684C00E8CAAE /* Default-568h@2x.png */,
@@ -947,6 +959,10 @@
 				BDE32F6F181C684C00E8CAAE /* Icon@2x.png in Resources */,
 				BDE32F72181C684C00E8CAAE /* iTunesArtwork in Resources */,
 				BDE330CB181C685000E8CAAE /* ChangeLog in Resources */,
+				BD3E09B1181CB3C600BD22BE /* normalBar-hd.png in Resources */,
+				BD3E09B2181CB3C600BD22BE /* normalBar.png in Resources */,
+				BD3E09B5181D61B500BD22BE /* yellowBrick-hd.png in Resources */,
+				BD3E09B6181D61B500BD22BE /* yellowBrick.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1128,6 +1144,7 @@
 					"\"Fire Ball/libs/kazmath/include\"",
 				);
 				INFOPLIST_FILE = "Fire Ball/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -1149,6 +1166,7 @@
 					"\"Fire Ball/libs/kazmath/include\"",
 				);
 				INFOPLIST_FILE = "Fire Ball/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -1179,6 +1197,7 @@
 				BDE330F8181C685000E8CAAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
