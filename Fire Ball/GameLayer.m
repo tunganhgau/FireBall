@@ -20,7 +20,9 @@ NSMutableArray *bricks;
 CCSprite *ball;
 float angle;
 CGSize screenSize; //iphone 4(480x320), iphone5(568,320), ipad(1024x768)
+float speed;
 BOOL skipThisFrame=NO; // this to prevent a bug when the ball collide with the bar
+NSString *device;
 
 +(CCScene *) scene
 {
@@ -43,7 +45,12 @@ BOOL skipThisFrame=NO; // this to prevent a bug when the ball collide with the b
     if( (self=[super init])) {
         // get the screen size
         screenSize = [[CCDirector sharedDirector] winSize];
-
+        if (screenSize.width==1024) {
+            device = @"iPad";
+        }
+        else{
+            device = @"iPhone";
+        }
         NSLog(@"Width:%f, Height:%f", screenSize.width, screenSize.height);
         [self initBar];
         [self initBricks];
@@ -61,7 +68,6 @@ BOOL skipThisFrame=NO; // this to prevent a bug when the ball collide with the b
 }
 
 - (void) moveBall{
-    float speed = 3; // Move 50 pixels in 60 frames (1 second)
     float radian = angle * M_PI / 180;
 
     float vx = cos(radian) * speed;
@@ -182,18 +188,39 @@ BOOL skipThisFrame=NO; // this to prevent a bug when the ball collide with the b
 - (int) detectCollisionWithBall:(CCSprite*) ball andSprite:(CCSprite *) sprite{
     if (CGRectIntersectsRect([ball boundingBox], [sprite boundingBox])) {
         //NSLog(@"Collided");
-        if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)>0){NSLog(@"Top Collided");
-            return 1;
+        if (angle<=90) {
+            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){NSLog(@"Right Collided");
+                return 2;
+            }
+            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){NSLog(@"Top Collided");
+                return 1;
+            }
         }
-        if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){NSLog(@"Bottom Collided");
-            return 3;
+        else if(angle>90 && angle<=180){
+            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){NSLog(@"Left Collided");
+                return 4;
+            }
+            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){NSLog(@"Top Collided");
+                return 1;
+            }
         }
-        if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){NSLog(@"Right Collided");
-            return 2;
+        else if (angle>180 && angle <=270){
+            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){NSLog(@"Left Collided");
+                return 4;
+            }
+            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){NSLog(@"Bottom Collided");
+                return 3;
+            }
         }
-        if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x - [sprite boundingBox].size.width/2) >0){NSLog(@"Left Collided");
-            return 4;
+        else{
+            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){NSLog(@"Right Collided");
+                return 2;
+            }
+            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){NSLog(@"Bottom Collided");
+                return 3;
+            }
         }
+       
         
     }
     /*
@@ -240,20 +267,48 @@ else{
 
 -(void) initBricks{
     bricks = [[NSMutableArray alloc]init];
-    int border = 20;
-    int brickWidth = 30;
-    int margin = border;
-    for (int i = 0; i<10; i++) {
-        CCSprite *brick = [CCSprite spriteWithFile:@"whiteBrick.png"];
-        margin=margin+[brick boundingBox].size.width+1;
-        brick.position = ccp(margin, screenSize.height - 50);
-        [self addChild:brick];
-        [bricks addObject:brick];
-        NSLog(@"%d", margin);
+    CCSprite *dummyBrick = [CCSprite spriteWithFile:@"whiteBrick.png"];
+    float brickWidth = [dummyBrick boundingBox].size.width;
+    float brickHeight= [dummyBrick boundingBox].size.height;
+    //[dummyBrick release];
+    float border;
+    float topMargin;
+    if ([device isEqual:@"iPhone"]) {
+        border = 1;
+        topMargin = 50;
+    }
+    else{
+        border = 2;
+        topMargin = 80;
+    }
+    
+    float leftMargin = (screenSize.width -brickWidth*10 - 9)/2;
+
+    for (int row = 0; row<7; row++) {
+        float temp = leftMargin;
+        for (int col = 0; col <10; col++) {
+            CCSprite *brick = [CCSprite spriteWithFile:@"whiteBrick.png"];
+            float x = leftMargin+[brick boundingBox].size.width/2+border;
+            float y = screenSize.height - topMargin-[brick boundingBox].size.height/2-border;
+            brick.position = ccp(x, y);
+            [self addChild:brick];
+            [bricks addObject:brick];
+            //NSLog(@"%d", margin);
+            leftMargin+=brickWidth+border;
+        }
+        leftMargin = temp;
+        topMargin+=brickHeight+border;
     }
 }
 
 -(void) initBall{
+    if ([device isEqual:@"iPhone"]) {
+        speed = 5;
+    }
+    else{
+        speed = 20;
+    }
+    NSLog(@"%@, %f", device, speed);
     NSInteger random = (arc4random()%90)+60;
     angle = random;
     ball = [CCSprite spriteWithFile:@"ball.png"];
