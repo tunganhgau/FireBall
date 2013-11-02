@@ -81,27 +81,29 @@ NSString *device;
 }
 
 -(void) detectAllCollision{
+    int collideValue= 0;
 	for (int i = 0; i<[bricks count]; i++){
-		int collideValue =[self detectCollisionWithBall:ball andSprite:bricks[i]];
+		int collision =[self detectCollisionWithBall:ball andSprite:bricks[i]];
         //NSLog(@"%d", collideValue);
-		if (collideValue != 0){
+		if (collision != 0){
+            collideValue = collision;
 			// collide with brick
-			switch(collideValue){
-				case(1):
-					[self collideOnTop];break;
-				case(2):
-					[self collideOnRight];break;
-				case(3):
-					[self collideOnBottom];break;
-				case(4):
-					[self collideOnLeft];break;
-				default:
-					break;
-			}
 			[self removeChild:bricks[i]];
 			[bricks removeObject:bricks[i]];
 		}
 	}
+    switch(collideValue){
+        case(1):
+            [self collideOnTop];break;
+        case(2):
+            [self collideOnRight];break;
+        case(3):
+            [self collideOnBottom];break;
+        case(4):
+            [self collideOnLeft];break;
+        default:
+            break;
+    }
     
     //hit the left screen
     if (ball.position.x < [ball boundingBox].size.width/2){
@@ -189,7 +191,11 @@ NSString *device;
     if (CGRectIntersectsRect([ball boundingBox], [sprite boundingBox])) {
         //NSLog(@"Collided");
         if (angle<=90) {
-            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){NSLog(@"Right Collided");
+            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){
+                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *4/5) {
+                    NSLog(@"Teehee");
+                    return 1;
+                }
                 return 2;
             }
             if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){NSLog(@"Top Collided");
@@ -197,7 +203,11 @@ NSString *device;
             }
         }
         else if(angle>90 && angle<=180){
-            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){NSLog(@"Left Collided");
+            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){
+                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *4/5) {NSLog(@"Teehee");
+                    return 1;
+                }
+
                 return 4;
             }
             if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){NSLog(@"Top Collided");
@@ -205,7 +215,11 @@ NSString *device;
             }
         }
         else if (angle>180 && angle <=270){
-            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){NSLog(@"Left Collided");
+            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){
+                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *4/5) {NSLog(@"Teehee");
+                    return 3;
+                }
+
                 return 4;
             }
             if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){NSLog(@"Bottom Collided");
@@ -213,7 +227,11 @@ NSString *device;
             }
         }
         else{
-            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){NSLog(@"Right Collided");
+            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){
+                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *3/4) {NSLog(@"Teehee");
+                    return 3;
+                }
+
                 return 2;
             }
             if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){NSLog(@"Bottom Collided");
