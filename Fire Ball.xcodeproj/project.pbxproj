@@ -11,8 +11,9 @@
 		BD3E09B2181CB3C600BD22BE /* normalBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3E09B0181CB3C600BD22BE /* normalBar.png */; };
 		BD3E09B5181D61B500BD22BE /* yellowBrick-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3E09B3181D61B500BD22BE /* yellowBrick-hd.png */; };
 		BD3E09B6181D61B500BD22BE /* yellowBrick.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3E09B4181D61B500BD22BE /* yellowBrick.png */; };
-		BD74A04E181E092800C1DE80 /* ball-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BD74A04C181E092800C1DE80 /* ball-hd.png */; };
-		BD74A04F181E092800C1DE80 /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = BD74A04D181E092800C1DE80 /* ball.png */; };
+		BD48904E18259DF1002CED39 /* ball-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BD48904B18259DF1002CED39 /* ball-hd.png */; };
+		BD48904F18259DF1002CED39 /* ball-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = BD48904C18259DF1002CED39 /* ball-ipadhd.png */; };
+		BD48905018259DF1002CED39 /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = BD48904D18259DF1002CED39 /* ball.png */; };
 		BDE32F47181C684C00E8CAAE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE32F46181C684C00E8CAAE /* QuartzCore.framework */; };
 		BDE32F49181C684C00E8CAAE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE32F48181C684C00E8CAAE /* OpenGLES.framework */; };
 		BDE32F4B181C684C00E8CAAE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE32F4A181C684C00E8CAAE /* OpenAL.framework */; };
@@ -163,8 +164,9 @@
 		BD3E09B0181CB3C600BD22BE /* normalBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalBar.png; path = Resources/normalBar.png; sourceTree = "<group>"; };
 		BD3E09B3181D61B500BD22BE /* yellowBrick-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yellowBrick-hd.png"; path = "Resources/yellowBrick-hd.png"; sourceTree = "<group>"; };
 		BD3E09B4181D61B500BD22BE /* yellowBrick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowBrick.png; path = Resources/yellowBrick.png; sourceTree = "<group>"; };
-		BD74A04C181E092800C1DE80 /* ball-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ball-hd.png"; path = "Resources/ball-hd.png"; sourceTree = "<group>"; };
-		BD74A04D181E092800C1DE80 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ball.png; path = Resources/ball.png; sourceTree = "<group>"; };
+		BD48904B18259DF1002CED39 /* ball-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ball-hd.png"; path = "Resources/sprites/ball-hd.png"; sourceTree = "<group>"; };
+		BD48904C18259DF1002CED39 /* ball-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ball-ipadhd.png"; path = "Resources/sprites/ball-ipadhd.png"; sourceTree = "<group>"; };
+		BD48904D18259DF1002CED39 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ball.png; path = Resources/sprites/ball.png; sourceTree = "<group>"; };
 		BDE32F43181C684C00E8CAAE /* Fire Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fire Ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE32F46181C684C00E8CAAE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BDE32F48181C684C00E8CAAE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -482,6 +484,9 @@
 		BD74A050181F265C00C1DE80 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				BD48904B18259DF1002CED39 /* ball-hd.png */,
+				BD48904C18259DF1002CED39 /* ball-ipadhd.png */,
+				BD48904D18259DF1002CED39 /* ball.png */,
 				BDFABB09181F448200053DBF /* bar-568h.png */,
 				BDFABB0A181F448200053DBF /* bar-hd.png */,
 				BDFABB0B181F448200053DBF /* bar-ipadhd.png */,
@@ -550,8 +555,6 @@
 			isa = PBXGroup;
 			children = (
 				BD74A050181F265C00C1DE80 /* sprites */,
-				BD74A04C181E092800C1DE80 /* ball-hd.png */,
-				BD74A04D181E092800C1DE80 /* ball.png */,
 				BD3E09B3181D61B500BD22BE /* yellowBrick-hd.png */,
 				BD3E09B4181D61B500BD22BE /* yellowBrick.png */,
 				BD3E09AF181CB3C600BD22BE /* normalBar-hd.png */,
@@ -944,6 +947,7 @@
 				BDE32F3F181C684C00E8CAAE /* Sources */,
 				BDE32F40181C684C00E8CAAE /* Frameworks */,
 				BDE32F41181C684C00E8CAAE /* Resources */,
+				50524F424C454D533F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1001,8 +1005,6 @@
 				BD3E09B2181CB3C600BD22BE /* normalBar.png in Resources */,
 				BD3E09B5181D61B500BD22BE /* yellowBrick-hd.png in Resources */,
 				BD3E09B6181D61B500BD22BE /* yellowBrick.png in Resources */,
-				BD74A04E181E092800C1DE80 /* ball-hd.png in Resources */,
-				BD74A04F181E092800C1DE80 /* ball.png in Resources */,
 				BDFABB11181F448200053DBF /* bar-568h.png in Resources */,
 				BDFABB12181F448200053DBF /* bar-hd.png in Resources */,
 				BDFABB13181F448200053DBF /* bar-ipadhd.png in Resources */,
@@ -1011,10 +1013,29 @@
 				BDFABB16181F448200053DBF /* whiteBrick-hd.png in Resources */,
 				BDFABB17181F448200053DBF /* whiteBrick-ipadhd.png in Resources */,
 				BDFABB18181F448200053DBF /* whiteBrick.png in Resources */,
+				BD48904E18259DF1002CED39 /* ball-hd.png in Resources */,
+				BD48904F18259DF1002CED39 /* ball-ipadhd.png in Resources */,
+				BD48905018259DF1002CED39 /* ball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		50524F424C454D533F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Library/JailCoder/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n/Library/JailCoder/Entitlements/Entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BDE32F3F181C684C00E8CAAE /* Sources */ = {
@@ -1144,7 +1165,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1165,7 +1186,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,

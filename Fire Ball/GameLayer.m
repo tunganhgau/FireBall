@@ -135,7 +135,6 @@ NSString *device;
             if (angle>150) {
                 angle=150;
             }
-            NSLog(@"Collided");
             skipThisFrame = YES;
         }
 	}
@@ -152,6 +151,7 @@ NSString *device;
 	else{
 		angle = 360-(angle-180);
 	}
+    //NSLog(@"Collided Right");
 }
 -(void) collideOnLeft{
 	if (angle <180){
@@ -160,6 +160,7 @@ NSString *device;
 	else{
 		angle=360-(angle-180);
 	}
+    //NSLog(@"Collided Left");
 }
 -(void) collideOnTop{
 	if (angle==90){
@@ -171,6 +172,7 @@ NSString *device;
 	else{
 		angle=360-angle;
 	}
+    //NSLog(@"Collided Top");
 }
 -(void) collideOnBottom{
 	if (angle==270){
@@ -182,6 +184,7 @@ NSString *device;
 	else{
 		angle=360-angle;
 	}
+    //NSLog(@"Collided Bottom");
 }
 
 
@@ -191,89 +194,49 @@ NSString *device;
     if (CGRectIntersectsRect([ball boundingBox], [sprite boundingBox])) {
         //NSLog(@"Collided");
         if (angle<=90) {
-            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){
-                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *4/5) {
-                    NSLog(@"Teehee");
-                    return 1;
-                }
+            if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
                 return 2;
             }
-            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){NSLog(@"Top Collided");
+            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){
                 return 1;
             }
         }
         else if(angle>90 && angle<=180){
-            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){
-                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *4/5) {NSLog(@"Teehee");
-                    return 1;
-                }
+            if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
 
                 return 4;
             }
-            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){NSLog(@"Top Collided");
+            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){
                 return 1;
             }
         }
         else if (angle>180 && angle <=270){
-            if (ball.position.x-[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) <0){
-                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *4/5) {NSLog(@"Teehee");
-                    return 3;
-                }
+            if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
 
                 return 4;
             }
-            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){NSLog(@"Bottom Collided");
+            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){
                 return 3;
             }
         }
         else{
-            if (ball.position.x+[ball boundingBox].size.width/2 - (sprite.position.x + [sprite boundingBox].size.width/2) >0){
-                if (fabsf(sprite.position.x - ball.position.x) < [sprite boundingBox].size.width *3/4) {NSLog(@"Teehee");
-                    return 3;
-                }
+            if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
+ 
 
                 return 2;
             }
-            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){NSLog(@"Bottom Collided");
+            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){
                 return 3;
             }
         }
        
         
     }
-    /*
-	if (ball.position.x+[ball boundingBox].size.width/2 - sprite.position.x - [sprite boundingBox].size.width/2 <0){NSLog(@"Collided");
-        return 2;
-	}
-	if (ball.position.x-[ball boundingBox].size.width/2 == sprite.position.x + [sprite boundingBox].size.width/2){NSLog(@"Collided");
-        return 4;
-	}
-	if (ball.position.y+[ball boundingBox].size.height/2 == sprite.position.y - [sprite boundingBox].size.height/2){NSLog(@"Collided");
-        return 1;
-	}
-	if (ball.position.y-[ball boundingBox].size.height/2 == sprite.position.y + [sprite boundingBox].size.height/2){NSLog(@"Collided");
-        return 3;
-	}
-    */
+
 	return 0;
 }
 
-/*
 
-if(screenSize.width==568){
-	//iphone5
-	//[CCFileUtils setiPhoneFourInchDisplaySuffix:@"-568h"];
-	//width*2.4
-    
-}
-else if(screen.width==480){
-	//iphone
-}
-else{
-	//ipad 1024x768
-	//width*2.1, height*2.4
-}
-*/
 
 // initialize the bottom bar
 -(void) initBar{
@@ -324,7 +287,7 @@ else{
         speed = 5;
     }
     else{
-        speed = 20;
+        speed = 10;
     }
     NSLog(@"%@, %f", device, speed);
     NSInteger random = (arc4random()%90)+60;
@@ -354,7 +317,15 @@ else{
     
     CGPoint translation = ccpSub(touchLocation, oldTouchLocation);
     CGPoint newPos = ccpAdd(bar.position, translation);
-    bar.position = ccp(newPos.x, [bar boundingBox].size.height/2);
+    if (newPos.x < [bar boundingBox].size.width/2) {
+        bar.position = ccp([bar boundingBox].size.width/2, [bar boundingBox].size.height/2);
+    }
+    else if(newPos.x > screenSize.width - [bar boundingBox].size.width/2){
+        bar.position = ccp(screenSize.width - [bar boundingBox].size.width/2, [bar boundingBox].size.height/2);
+    }
+    else{
+        bar.position = ccp(newPos.x, [bar boundingBox].size.height/2);
+    }
 }
 
 // on "dealloc" you need to release all your retained objects
