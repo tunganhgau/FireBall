@@ -15,6 +15,7 @@
 
 @implementation GameLayer
 
+
 CCSprite *bar;
 NSMutableArray *bricks;
 CCSprite *ball;
@@ -23,6 +24,8 @@ CGSize screenSize; //iphone 4(480x320), iphone5(568,320), ipad(1024x768)
 float speed;
 BOOL skipThisFrame=NO; // this to prevent a bug when the ball collide with the bar
 NSString *device;
+
+int life = 3;
 
 +(CCScene *) scene
 {
@@ -59,6 +62,8 @@ NSString *device;
         [self schedule:@selector(nextFrame:)];
         
         self.isTouchEnabled = YES;
+        
+        [[CCDirector sharedDirector] setDisplayStats:NO];
     }
     return self;
 }
@@ -120,8 +125,12 @@ NSString *device;
     
     // fall off
     if(ball.position.y+[ball boundingBox].size.height/2<0) {
-        ball.position = ccp(bar.position.x, bar.position.y*2+[ball boundingBox].size.height/2 );
-        angle = (arc4random()%90)+60;
+        if (life>0) {
+            [self resetBall];
+        }
+        else{
+            [self gameEnded];
+        }
     }
     
 	if (CGRectIntersectsRect(ball.boundingBox, bar.boundingBox)){
@@ -143,6 +152,17 @@ NSString *device;
     }
 }
 
+-(void) gameEnded{
+    [[CCDirector sharedDirector] pause];
+    UIAlertView *gameOverAlert = [[UIAlertView alloc]initWithTitle:@"Game Over" message:@"That was a good game" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [gameOverAlert show];
+}
+
+-(void) resetBall{
+    life--;
+    ball.position = ccp(bar.position.x, bar.position.y*2+[ball boundingBox].size.height/2 );
+    angle = (arc4random()%90)+60;
+}
 
 -(void) collideOnRight{
 	if (angle < 180){
@@ -197,27 +217,38 @@ NSString *device;
             if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
                 return 2;
             }
-            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){
-                return 1;
-            }
+            //if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){
+                if (fabsf(ball.position.y-sprite.position.y) < [sprite boundingBox].size.height/2) {
+                    return 2;
+                }
+            //}
+            
+            return 1;
         }
         else if(angle>90 && angle<=180){
             if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
 
                 return 4;
             }
-            if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){
-                return 1;
-            }
+            //if (ball.position.y+[ball boundingBox].size.height/2 - (sprite.position.y - [sprite boundingBox].size.height/2)>0){
+                if (fabsf(ball.position.y-sprite.position.y) < [sprite boundingBox].size.height/2) {
+                    return 4;
+                }
+            //}
+            return 1;
         }
         else if (angle>180 && angle <=270){
             if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
 
                 return 4;
             }
-            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){
-                return 3;
-            }
+            
+            //if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){
+                if (fabsf(ball.position.y-sprite.position.y) < [sprite boundingBox].size.height/2) {
+                    return 4;
+                }
+            //}
+            return 3;
         }
         else{
             if (fabsf(ball.position.x - sprite.position.x) >  ([ball boundingBox].size.width/2+[sprite boundingBox].size.width/2)*0.9){
@@ -225,9 +256,13 @@ NSString *device;
 
                 return 2;
             }
-            if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){
-                return 3;
-            }
+            
+            //if (ball.position.y-[ball boundingBox].size.height/2 - (sprite.position.y + [sprite boundingBox].size.height/2)<0){
+                if (fabsf(ball.position.y-sprite.position.y) < [sprite boundingBox].size.height/2) {
+                    return 2;
+                }
+            //}
+            return 3;
         }
        
         
@@ -326,6 +361,24 @@ NSString *device;
     else{
         bar.position = ccp(newPos.x, [bar boundingBox].size.height/2);
     }
+}
+
+- (void) applicationDidEnterBackground:(UIApplication *)application
+{
+    [[CCDirector sharedDirector] stopAnimation];
+    [[CCDirector sharedDirector] pause];
+}
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [[CCDirector sharedDirector] stopAnimation];
+    [[CCDirector sharedDirector] pause];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [[CCDirector sharedDirector] stopAnimation]; // call this to make sure you don't start a second display link!
+    [[CCDirector sharedDirector] resume];
+    [[CCDirector sharedDirector] startAnimation];
 }
 
 // on "dealloc" you need to release all your retained objects
